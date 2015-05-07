@@ -1,0 +1,63 @@
+# Repositorio local da Secretaria da Fazenda do Para - SEFA-PA
+# 
+# Para utiliza-lo permanentemente, utilize a ferramenta disponibilizada pelo pacote 'yum-utils':
+# 	yum-config-manager --disable \* ; yum-config-manager --enable sefa\*
+#
+# Ou temporariamente com:
+# 	yum --disablerepo=\* --enablerepo=sefa\* <parametro1> <parametro2>
+#
+
+[sefa-base]
+name=Repositorio Local SEFA - CentOS-$releasever - BASE REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/os/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-updates]
+name=Repositorio Local SEFA - CentOS-$releasever - UPDATE REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/updates/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-centosplus]
+name=Repositorio Local SEFA - CentOS-$releasever - CENTOSPLUS REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/centosplus/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-contrib]
+name=Repositorio Local SEFA - CentOS-$releasever - CONTRIB REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/contrib/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-cr]
+name=Repositorio Local SEFA - CentOS-$releasever - CR REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/cr/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-extras]
+name=Repositorio Local SEFA - CentOS-$releasever - EXTRAS REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/extras/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1
+
+
+[sefa-fasttrack]
+name=Repositorio Local SEFA - CentOS-$releasever - FASTTRACK REPO
+baseurl=http://replocal.sefa.pa.gov.br/centos/$releasever/fasttrack/$basearch/
+gpgcheck=1
+gpgkey=http://replocal.sefa.pa.gov.br/centos/RPM-GPG-KEY-CentOS-6
+enabled=1

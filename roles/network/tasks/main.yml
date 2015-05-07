@@ -1,0 +1,19 @@
+---
+
+- name: Configure /etc/sysconfig/network file
+  template: src=etc_sysconfig_network.j2 dest=/etc/sysconfig/network
+
+- name: Configure /etc/hosts file
+  template: src=etc_hosts.j2 dest=/etc/hosts
+
+- name: Configure /etc/resolv.conf file
+  template: src=etc_resolv.conf.j2 dest=/etc/resolv.conf
+
+- name: Ensure NetworkManager is stopped
+  service: name=NetworkManager state=stopped enabled=no
+
+- name: Disable and stop iptables
+  service: name=iptables state=stopped enabled=no
+
+- name: Disable and stop ip6tables
+  service: name=ip6tables state=stopped enabled=no

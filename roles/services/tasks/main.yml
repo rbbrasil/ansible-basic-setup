@@ -1,0 +1,14 @@
+---
+- name: Install NTP package
+  yum: name=ntp state=present
+
+- name: Configure NTP service
+  template: src=etc_ntp.conf.j2 dest=/etc/ntp.conf backup=yes
+            owner=root group=root mode=0640
+  notify: restart ntp
+
+- name: NTP service state
+  service: name=ntpd state=started enabled=yes
+
+- name: Disable postfix
+  service: name=postfix state=stopped enabled=no

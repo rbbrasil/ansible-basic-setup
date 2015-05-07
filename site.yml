@@ -1,0 +1,19 @@
+---
+
+- name: Apply the network configuration
+  hosts: my_vm
+  remote_user: root
+  roles:
+    - network
+
+- name: Deploy basic system setup
+  hosts: my_vm
+  remote_user: root
+  roles:
+    - system
+
+- name: Deploy basic services
+  hosts: my_vm
+  remote_user: root
+  roles:
+    - services

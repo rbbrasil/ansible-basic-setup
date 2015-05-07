@@ -1,0 +1,45 @@
+---
+- name: Install dependencies from repository
+  yum: name={{ item }} state=present
+  with_items:
+    - tar
+    - perl
+    - gcc
+    - make
+    - kernel-headers
+    - kernel-devel
+
+- name: Create mount point /mnt/cd
+  file: path=/mnt/cd state=directory
+
+- name: Mount VMware Tools disk (/dev/sr0) [must attach it]
+  mount: src=/dev/sr0 fstype=iso9660 name=/mnt/cd state=mounted
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+        and ansible_distribution_major_version >= "6"
+
+- name: Mount VMware Tools disk (/dev/cdrom) [must attach it]
+  mount: src=/dev/cdrom fstype=iso9660 name=/mnt/cd state=mounted
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+        and ansible_distribution_major_version == "5"
+
+- command: find /mnt/cd/ -name "*.tar.gz"
+  register: vmwaretools_gzip
+
+- name: Extract VMware Tools package
+  unarchive: copy=no dest=/opt/ src={{ vmwaretools_gzip.stdout }}
+
+- name: Start VMware Tools installation
+  command: /opt/vmware-tools-distrib/vmware-install.pl -d
+
+- name: Umount CD-ROM
+  mount: src=/dev/sr0 fstype=iso9660 name=/mnt/cd state=unmounted
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+        and ansible_distribution_major_version >= "6"
+
+- name: Umount CD-ROM
+  mount: src=/dev/cdrom fstype=iso9660 name=/mnt/cd state=unmounted
+  when: (ansible_distribution == "CentOS" or ansible_distribution == "RedHat")
+        and ansible_distribution_major_version == "5"
+
+- name: Clear installation files
+  file: path=/opt/vmware-tools-distrib state=absent

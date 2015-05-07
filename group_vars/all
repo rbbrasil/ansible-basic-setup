@@ -1,0 +1,12 @@
+---
+
+domain: my.localdomain
+
+ntp_server: ntp.{{ domain }}
+
+nameserver01: 10.1.1.10
+nameserver02: 10.1.1.11
+nameserver03: 10.1.1.12
+nameserver04: 10.1.1.13
+
+default_gw: 10.1.1.254
