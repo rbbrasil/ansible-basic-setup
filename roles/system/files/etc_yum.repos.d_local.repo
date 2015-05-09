@@ -1,55 +1,48 @@
-[repo-base]
-name=Repositorio Local SEFA - CentOS-$releasever - BASE REPO
+[local-base]
+name=Local Repository - CentOS-$releasever - BASE REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/os/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-updates]
-name=Repositorio Local SEFA - CentOS-$releasever - UPDATE REPO
+[local-updates]
+name=Local Repository - CentOS-$releasever - UPDATE REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/updates/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-centosplus]
-name=Repositorio Local SEFA - CentOS-$releasever - CENTOSPLUS REPO
+[local-centosplus]
+name=Local Repository - CentOS-$releasever - CENTOSPLUS REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/centosplus/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-contrib]
-name=Repositorio Local SEFA - CentOS-$releasever - CONTRIB REPO
+[local-contrib]
+name=Local Repository - CentOS-$releasever - CONTRIB REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/contrib/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-cr]
-name=Repositorio Local SEFA - CentOS-$releasever - CR REPO
+[local-cr]
+name=Local Repository - CentOS-$releasever - CR REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/cr/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-extras]
-name=Repositorio Local SEFA - CentOS-$releasever - EXTRAS REPO
+[local-extras]
+name=Local Repository - CentOS-$releasever - EXTRAS REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/extras/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
 
-
-[repo-fasttrack]
-name=Repositorio Local SEFA - CentOS-$releasever - FASTTRACK REPO
+[local-fasttrack]
+name=Local Repository - CentOS-$releasever - FASTTRACK REPO
 baseurl=http://repo.my.localdomain/centos/$releasever/fasttrack/$basearch/
 gpgcheck=1
 gpgkey=http://repo.my.localdomain/centos/RPM-GPG-KEY-CentOS-6
 enabled=1
-
