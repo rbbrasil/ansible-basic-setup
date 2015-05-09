@@ -8,23 +8,23 @@
     - CentOS-Testing.repo
 
 - name: Create local CentOS repository file
-  copy: src=etc_yum.repos.d_sefa.repo dest=/etc/yum.repos.d/sefa.repo
+  copy: src=etc_yum.repos.d_local.repo dest=/etc/yum.repos.d/local.repo
           owner=root group=root mode=0644
 
 - name: Install yum-utils package
-  yum: name=yum-utils state=present disablerepo=* enablerepo=sefa*
+  yum: name=yum-utils state=present disablerepo=* enablerepo=local*
   when: ansible_distribution_major_version >= "6"
   ignore_errors: yes
 
 - name: Configure the local repository
   command: /usr/bin/yum-config-manager --enable {{ item }}
   with_items:
-    - sefa-base
-    - sefa-updates
-    - sefa-centosplus
-    - sefa-contrib
-    - sefa-cr
-    - sefa-extras
-    - sefa-fasttrack
+    - local-base
+    - local-updates
+    - local-centosplus
+    - local-contrib
+    - local-cr
+    - local-extras
+    - local-fasttrack
   when: ansible_distribution_major_version >= "6"
   ignore_errors: yes
