@@ -1,19 +1,15 @@
 ---
-
-- name: Apply the network configuration
-  hosts: my_vm
+- hosts: my_vm
   remote_user: root
+
+  name: Basic setup
   roles:
+    - { role: rpm-repo, tags: repo }
     - network
-
-- name: Deploy basic system setup
-  hosts: my_vm
-  remote_user: root
-  roles:
     - system
-
-- name: Deploy basic services
-  hosts: my_vm
-  remote_user: root
-  roles:
     - services
+    - { role: vmware-tools, tags: vmtools }
+
+  post_tasks:
+    - name: Reboot host
+      command: /sbin/shutdown -r now

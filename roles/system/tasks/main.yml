@@ -1,11 +1,9 @@
 ---
-- include: repositorio.yml
-  when: ansible.distribution == "CentOS" and ansible_architecture == "x86_64"
-
-- name: Disable SELinux
-  copy: src=etc_selinux_config dest=/etc/selinux/config
-
 - command: /usr/sbin/setenforce 0
+  ignore_errors: yes
+
+- name: Desabilita SELinux
+  selinux: state=disabled
 
 - name: Install system management tool
   yum: name={{ item }} state=present
@@ -13,5 +11,9 @@
     - strace
     - nc
     - bind-utils
+    - lsof
+    - mlocate
+    - vim
+  ignore_errors: yes
 
-- include: vmwaretools.yml
+# - include: vmwaretools.yml

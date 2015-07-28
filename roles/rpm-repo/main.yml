@@ -1,15 +1,20 @@
 ---
-- file: state=absent path=/etc/yum.repos.d/{{ item }}
+- name: Remove others repo files
+  file: state=absent path=/etc/yum.repos.d/{{ item }}
   with_items:
     - CentOS-Base.repo
     - CentOS-Debuginfo.repo
     - CentOS-Media.repo
     - CentOS-Vault.repo
     - CentOS-Testing.repo
+    - rhel-debuginfo.repo
+    - rhel-source.repo
+    - redhat.repo
 
-- name: Create local CentOS repository file
-  copy: src=etc_yum.repos.d_local.repo dest=/etc/yum.repos.d/local.repo
-          owner=root group=root mode=0644
+- name: Create a new repository file
+  copy: src=etc_yum.repos.d_local.repo
+        dest=/etc/yum.repos.d/local.repo
+        owner=root group=root mode=0644
 
 - name: Install yum-utils package
   yum: name=yum-utils state=present disablerepo=* enablerepo=local*

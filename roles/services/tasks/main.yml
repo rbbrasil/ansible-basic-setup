@@ -1,14 +1,40 @@
 ---
-- name: Install NTP package
-  yum: name=ntp state=present
+- name: Install ntp and ntpdate
+  yum: name={{ item }} state=present
+  with_items:
+    - ntp
+    - ntpdate
 
-- name: Configure NTP service
-  template: src=etc_ntp.conf.j2 dest=/etc/ntp.conf backup=yes
+- stat: path=/etc/init.d/ntpd
+  register: ntp_init_script
+
+- name: Ensure ntpd is stopped
+  service: name=ntpd state=stopped
+  when: ntp_init_script.stat.exists
+
+- name: Adjust clock
+  command: ntpdate {{ ntp_server }}
+  ignore_errors: yes
+
+- name: Configure ntp daemon
+  template: src=etc_ntp.conf.j2
+            dest=/etc/ntp.conf
+            backup=no
             owner=root group=root mode=0640
-  notify: restart ntp
+  notify:
+    - restart ntp
 
-- name: NTP service state
+- name: Start and enable ntpd
   service: name=ntpd state=started enabled=yes
 
-- name: Disable postfix
-  service: name=postfix state=stopped enabled=no
+- name: Enable sshd
+  service: name=sshd pattern=sshd enabled=yes
+
+- name: Stop and disable some services
+  service: name={{ item }} state=stopped enabled=no
+  with_items:
+    - NetworkManager
+    - iptables
+    - ip6tables
+    - postfix
+  ignore_errors: yes
